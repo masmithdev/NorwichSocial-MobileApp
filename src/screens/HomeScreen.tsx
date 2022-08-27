@@ -2,12 +2,15 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './styles';
 
-const DummyScreen = () => {
+const HomeScreen = () => {
   return (
     <View style={styles.screenWrapper}>
-      <Text>Hello</Text>
+      <Text>Hello, Home</Text>
     </View>
   );
 };
 
-export default DummyScreen;
+HomeScreen.Name = 'Home';
+HomeScreen.Title = 'Home Screen';
+
+export default HomeScreen;
