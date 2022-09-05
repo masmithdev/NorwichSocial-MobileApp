@@ -1,12 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import BaseNavigator from './navigators/BaseNavigator';
+import EventItemStoreProvider from './stores/EventItemStoreProvider';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <BaseNavigator />
-    </NavigationContainer>
+    <EventItemStoreProvider>
+      <NavigationContainer>
+        <BaseNavigator />
+      </NavigationContainer>
+    </EventItemStoreProvider>
   );
 };
 
