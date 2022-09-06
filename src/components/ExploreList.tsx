@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEventItemStore } from '../stores/EventItemStoreProvider';
 import { observer } from 'mobx-react-lite';
-import ListItem from './ListItem';
+import CondensedListEventItem from './CondensedListEventItem';
 import { View } from 'react-native';
 
 type Props = {
@@ -13,7 +13,7 @@ const ExploreList = observer(({ limit = 1000 }: Props) => {
 
   const items = itemStore.items
     .slice(0, limit)
-    .map(x => <ListItem key={x.id} item={x} />);
+    .map(x => <CondensedListEventItem key={x.id} item={x} />);
 
   return <View>{items}</View>;
 });

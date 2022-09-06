@@ -1,8 +1,9 @@
 import React from 'react';
 import { useEventItemStore } from '../stores/EventItemStoreProvider';
 import { observer } from 'mobx-react-lite';
-import ListItem from './ListItem';
-import { Text, View } from 'react-native';
+import CondensedListEventItem from './CondensedListEventItem';
+import CondensedList from './CondensedList';
+import { Text } from 'react-native';
 
 type Props = {
   limit: number;
@@ -13,12 +14,14 @@ const CalendarList = observer(({ limit = 100 }: Props) => {
 
   const items = attendingItems
     .slice(0, limit)
-    .map(x => <ListItem key={x.id} item={x} />);
+    .map(x => <CondensedListEventItem key={x.id} item={x} />);
 
-  if (items && items.length > 0) {
-    return <View>{items}</View>;
-  }
-  return <Text>You're not attending anything</Text>;
+  return (
+    <CondensedList
+      items={items}
+      fallback={<Text>You're not scheduled to attend anything yet.</Text>}
+    />
+  );
 });
 
 export default CalendarList;

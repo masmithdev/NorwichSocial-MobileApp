@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import useThemeStyles from '../globals/useThemeStyles';
 import CalendarList from './CalendarList';
 import Card from './Card';
@@ -11,7 +11,7 @@ const Calendar = () => {
     <View style={styles.wrapper}>
       <Card style={themeStyles.backgroundCard}>
         <View style={styles.main}>
-          <CardHeader>You Calendar</CardHeader>
+          <CardHeader>Your Calendar</CardHeader>
           <CalendarList limit={10} />
         </View>
       </Card>

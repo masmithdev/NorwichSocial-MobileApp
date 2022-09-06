@@ -24,8 +24,9 @@ export const useEventItemStore = () => React.useContext(EventItemStoreContext);
 for (let i: number = 0; i < 100; i++) {
   eventItemStore.insertOrUpdate(
     Math.random() * 1000 + '',
-    'Afternoon Walk in the city' + Math.random() * 1000,
-    false,
+    'Afternoon Walk in the city ' +
+      (Math.random() * 1000 + '').substring(0, Math.random() * 20),
+    Math.random() > 0.95,
     Math.random() * 1000,
     Math.random() * 1000,
   );
