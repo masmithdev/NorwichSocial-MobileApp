@@ -1,11 +1,11 @@
 import { makeAutoObservable } from 'mobx';
-import EventStore from './EventStore';
+import UserStore from './UserStore';
 
-class EventItem {
-  private _store: EventStore;
-  private _id: string;
+class UserItem {
+  private _store: UserStore;
+  private _id: string = '';
 
-  public constructor(store: EventStore, id: string) {
+  public constructor(store: UserStore, id: string) {
     this._store = store;
     this._id = id;
 
@@ -16,13 +16,13 @@ class EventItem {
     });
   }
 
-  get store() {
+  public get store() {
     return this._store;
   }
 
-  get id() {
+  public get id() {
     return this._id;
   }
 }
 
-export default EventItem;
+export default UserItem;

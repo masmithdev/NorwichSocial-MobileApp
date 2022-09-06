@@ -1,10 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { StyleSheet, Text, View } from 'react-native';
-import EventItem from '../stores/EventItem';
+import EventItemOld from '../stores/EventItemold';
 
 type Props = {
-  item: EventItem;
+  item: EventItemOld;
 };
 
 const CondensedListEventItem = observer(({ item }: Props) => {

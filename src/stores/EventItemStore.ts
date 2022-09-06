@@ -1,8 +1,8 @@
 import { action, computed, makeObservable, observable } from 'mobx';
-import EventItem from './EventItem';
+import EventItemOld from './EventItemold';
 
 class EventItemStore {
-  items: EventItem[] = [];
+  items: EventItemOld[] = [];
 
   constructor() {
     makeObservable(this, {
@@ -22,7 +22,7 @@ class EventItemStore {
   ) {
     let item = this.items.find(x => x.id === id);
     if (!item) {
-      item = new EventItem({ id, title, attending, start, end });
+      item = new EventItemOld({ id, title, attending, start, end });
       this.items.push(item);
     } else {
       action(() => {
