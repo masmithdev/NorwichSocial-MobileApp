@@ -3,21 +3,17 @@ import EventItem from './EventItem';
 import RootStore from './RootStore';
 
 class EventStore {
+  readonly rootStore: RootStore;
+
   public items: Array<EventItem> = [];
 
-  private _rootStore: RootStore;
-
   public constructor(rootStore: RootStore) {
-    this._rootStore = rootStore;
+    this.rootStore = rootStore;
 
     makeAutoObservable(this, {
       // overrides
       rootStore: false,
     });
-  }
-
-  public get rootStore() {
-    return this._rootStore;
   }
 }
 

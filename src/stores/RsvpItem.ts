@@ -4,15 +4,10 @@ import UserItem from './UserItem';
 
 export type RsvpRoleType = 'main-host' | 'host' | 'guest';
 export type RsvpAttendanceStatusType = 'going' | 'not-going' | 'watching';
-export type UpdateRsvpItemType = {
-  role?: RsvpRoleType;
-  status?: RsvpAttendanceStatusType;
-  guests?: number;
-};
 
 class RsvpItem {
-  private _event: EventItem;
-  private _user: UserItem;
+  readonly event: EventItem;
+  readonly user: UserItem;
 
   public guests: number = 0;
   public role: RsvpRoleType;
@@ -24,8 +19,8 @@ class RsvpItem {
     role: RsvpRoleType,
     status: RsvpAttendanceStatusType,
   ) {
-    this._event = event;
-    this._user = user;
+    this.event = event;
+    this.user = user;
     this.role = role;
     this.status = status;
 
@@ -34,14 +29,6 @@ class RsvpItem {
       event: false,
       user: false,
     });
-  }
-
-  public get event() {
-    return this._event;
-  }
-
-  public get user() {
-    return this._user;
   }
 }
 

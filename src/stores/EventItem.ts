@@ -3,28 +3,35 @@ import EventStore from './EventStore';
 import RsvpItem from './RsvpItem';
 
 class EventItem {
-  private _store: EventStore;
-  private _id: string;
+  readonly store: EventStore;
+  readonly id: string;
 
-  rsvps: Array<RsvpItem> = [];
+  public rsvps: Array<RsvpItem> = [];
+  public title: string = '';
+  public description: string = '';
+  public startIsoTimestamp: string = '';
+  public endIsoTimestamp: string = '';
 
-  public constructor(store: EventStore, id: string) {
-    this._store = store;
-    this._id = id;
+  public constructor(
+    store: EventStore,
+    id: string,
+    title: string,
+    description: string,
+    startIsoTimestamp: string,
+    endIsoTimestamp: string,
+  ) {
+    this.store = store;
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.startIsoTimestamp = startIsoTimestamp;
+    this.endIsoTimestamp = endIsoTimestamp;
 
     makeAutoObservable(this, {
       // overrides
       store: false,
       id: false,
     });
-  }
-
-  public get store() {
-    return this._store;
-  }
-
-  public get id() {
-    return this._id;
   }
 
   public get rsvpsGoing() {
