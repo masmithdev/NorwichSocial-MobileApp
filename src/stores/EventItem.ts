@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import EventStore from './EventStore';
-import RsvpItem from './RsvpItem';
+import RsvpItem, { RsvpAttendanceStatusType, RsvpRoleType } from './RsvpItem';
+import UserItem from './UserItem';
 
 class EventItem {
   readonly store: EventStore;
@@ -34,6 +35,16 @@ class EventItem {
     });
   }
 
+  public get attending(): boolean {
+    if (this.store.rootStore.authUser.user) {
+      const rsvp = this.rsvps.find(
+        x => x.user.id === this.store.rootStore.authUser.user!.id,
+      );
+      return !!rsvp && rsvp.status === 'going';
+    }
+    return false;
+  }
+
   public get rsvpsGoing() {
     return this.rsvps.filter(x => x.status === 'going');
   }
@@ -43,6 +54,32 @@ class EventItem {
       this.rsvpsGoing.length +
       this.rsvpsGoing.reduce((acc, item) => acc + item.guests, 0)
     );
+  }
+
+  public addRSVP(
+    user: UserItem,
+    role: RsvpRoleType,
+    status: RsvpAttendanceStatusType,
+  ) {
+    const newRSVP = new RsvpItem(this, user, role, status);
+    this.rsvps.push(newRSVP);
+  }
+
+  public toggleGoing() {
+    if (this.store.rootStore.authUser.user) {
+      const rsvp = this.rsvps.find(
+        x => x.user === this.store.rootStore.authUser.user!,
+      );
+      if (!rsvp) {
+        this.addRSVP(this.store.rootStore.authUser.user, 'guest', 'going');
+      } else {
+        if (rsvp.status === 'going') {
+          rsvp.status = 'not-going';
+        } else {
+          rsvp.status = 'going';
+        }
+      }
+    }
   }
 }
 

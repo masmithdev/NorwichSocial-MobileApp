@@ -1,10 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { StyleSheet, Text, View } from 'react-native';
-import EventItemOld from '../stores/EventItemold';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import EventItem from '../stores/EventItem';
 
 type Props = {
-  item: EventItemOld;
+  item: EventItem;
 };
 
 const CondensedListEventItem = observer(({ item }: Props) => {
@@ -84,6 +84,9 @@ const CondensedListEventItem = observer(({ item }: Props) => {
               </View>
             </View>
           </View>
+          <TouchableHighlight onPress={() => item.toggleGoing()}>
+            <Text>{item.attending ? 'Yes' : 'No'}</Text>
+          </TouchableHighlight>
         </View>
       </View>
     </View>
