@@ -1,28 +1,39 @@
 import { makeAutoObservable } from 'mobx';
 import EventItem from './EventItem';
-import RsvpStore from './RsvpStore';
 import UserItem from './UserItem';
 
+export type RsvpRoleType = 'main-host' | 'host' | 'guest';
+export type RsvpAttendanceStatusType = 'going' | 'not-going' | 'watching';
+export type UpdateRsvpItemType = {
+  role?: RsvpRoleType;
+  status?: RsvpAttendanceStatusType;
+  guests?: number;
+};
+
 class RsvpItem {
-  private _store: RsvpStore;
   private _event: EventItem;
   private _user: UserItem;
 
-  public constructor(store: RsvpStore, event: EventItem, user: UserItem) {
-    this._store = store;
+  public guests: number = 0;
+  public role: RsvpRoleType;
+  public status: RsvpAttendanceStatusType;
+
+  public constructor(
+    event: EventItem,
+    user: UserItem,
+    role: RsvpRoleType,
+    status: RsvpAttendanceStatusType,
+  ) {
     this._event = event;
     this._user = user;
+    this.role = role;
+    this.status = status;
 
     makeAutoObservable(this, {
       // overrides
-      store: false,
       event: false,
       user: false,
     });
-  }
-
-  public get store() {
-    return this._store;
   }
 
   public get event() {
